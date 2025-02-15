@@ -1,5 +1,3 @@
-<p>Now I can render any React component on any DOM node I want using ReactDOM.render</p>
-
 import React, { useState } from "react";
 
 const menuItems = [
@@ -32,7 +30,7 @@ const Menu = () => {
           <button
             key={index}
             id={`filter-btn-${index}`}
-            className={`px-4 py-2 rounded-md text-white ${selectedCategory === category ? "bg-blue-600" : "bg-gray-500"} transition`}
+            data-test-id={`filter-btn-${category}`}
             onClick={() => setSelectedCategory(category)}
           >
             {category.charAt(0).toUpperCase() + category.slice(1)}
@@ -42,13 +40,11 @@ const Menu = () => {
 
       <div id="main">
         {filteredItems.map((item) => (
-          <div key={item.id}>
-            <img src={item.img} alt={item.title}  />
-            <div>
-              <h2 >{item.title}</h2>
-              <p >${item.price}</p>
-              <p>{item.desc}</p>
-            </div>
+          <div key={item.id} data-test-id={`menu-item-${item.category}`}>
+            <img src={item.img} alt={item.title} />
+            <h2>{item.title}</h2>
+            <p>${item.price}</p>
+            <p>{item.desc}</p>
           </div>
         ))}
       </div>
